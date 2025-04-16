@@ -20,7 +20,7 @@
             }
         }
 
-        public string Solve()
+        public string Part1()
         {
             left.Sort();
             right.Sort();
@@ -29,6 +29,20 @@
             for (int i = 0; i < left.Count; i++)
             {
                 tote += Math.Abs(left[i] - right[i]);
+            }
+
+            return tote.ToString();
+        }
+
+        public string Part2()
+        {
+            left.Sort();
+            right.Sort();
+
+            int tote = 0;
+            foreach (var num in left)
+            {
+                tote += right.Where(x => x == num).Sum();
             }
 
             return tote.ToString();
