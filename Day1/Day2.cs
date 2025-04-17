@@ -16,7 +16,7 @@
             }
         }
 
-        public string Part1()
+        public override string Part1()
         {
             var safeCount = 0;
             foreach (var rep in _reports)
@@ -29,7 +29,7 @@
             return safeCount.ToString();
         }
 
-        public string Part2()
+        public override string Part2()
         {
             var safeCount = 0;
             foreach (var rep in _reports)
