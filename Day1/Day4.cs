@@ -4,15 +4,15 @@ namespace Puzzles;
 
 public class Day4(int i) : Day(i)
 {
-    private const string Term = "MASXF";
+    private const string Term = "XMAS";
 
     public override string Part1()
     {
         var count = 0;
-        var sb = new StringBuilder();
         
         int[][] deltas = new int[][]
         {
+            [0, 0],
             [0, -1],
             [-1, -1],
             [-1, 0],
@@ -27,40 +27,29 @@ public class Day4(int i) : Day(i)
         {
             for (int col = 0; col < Lines[0].Length; col++)
             {
+                var found = new char[Term.Length];
                 foreach (var d in deltas)
                 {
+                    var sy = col + d[0];
+                    var sx = row + d[1];
                     
+                    for (var i = 0; i < found.Length; i++)
+                    {
+                        found[i] = Lines[sy][sx];
+                        sy += d[0];
+                        sx += d[1];
+                        if (sy >= Lines.Count || sy == 0 || sx >= Lines[0].Length || sx == 0)
+                            break;
+                    }
+                    var fs = string.Join("", found);
+                    if (fs == Term || fs == Term.Reverse().ToString())
+                        count++;
                 }
-
-
-                
-                // for (var i = col; i >= 0 && sb.Length <= Term.Length; i--)
-                //     sb.Append(Lines[row][i]);
-                // if (sb.ToString() == Term || sb.ToString() == Term.Reverse().ToString())
-                //     count++;
-                // sb.Clear();
-                //
-                // for(var i = col; i < Lines[0].Length && sb.Length <= Term.Length; i++)
-                //     sb.Append(Lines[row][i]);
-                // if (sb.ToString() == Term || sb.ToString() == Term.Reverse().ToString())
-                //     count++;
-                // sb.Clear();
-                
-                // for(int dx = col, dy = row; col - dx >= 0 && row - dy >= 0 && sb.Length <= Term.Length; dx++, dy++)
-                //     sb.Append(Lines[row + dy][dx]);
             }
         }
-        
-        
-        
-        return "";
+        return count.ToString();
     }
-
-    private bool IsValidCell(int row, int col, int dy, int dx)
-    {
-        return col 
-    }
-
+    
     public string Part1B()
     {
 
