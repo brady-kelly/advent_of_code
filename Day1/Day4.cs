@@ -4,46 +4,67 @@ namespace Puzzles;
 
 public class Day4(int i) : Day(i)
 {
-    private const string Term = "XMAS";
+    private const string Term = "MASXF";
 
     public override string Part1()
     {
         var count = 0;
+        var sb = new StringBuilder();
         
-        var rev = Term.Reverse().ToString();
-
-        for (var y = 0; y < Lines.Count; y++)
+        int[][] deltas = new int[][]
         {
-            for (var x = 0; x < Lines[y].Length; x++)
+            [0, -1],
+            [-1, -1],
+            [-1, 0],
+            [-1, +1],
+            [0, +1],
+            [+1, +1],
+            [+1, 0],
+            [+1, -1]
+        };
+        
+        for (int row = 0; row < Lines.Count; row++)
+        {
+            for (int col = 0; col < Lines[0].Length; col++)
             {
-                if (x >= Term.Length)
+                foreach (var d in deltas)
                 {
-                    var sub = Lines[y].Substring(x - Term.Length, Term.Length);
-                    if (sub == Term || sub == rev)
-                        count++;
-                }
-
-                if (Lines[y].Length - x >= Term.Length)
-                {
-                    var sub2 = Lines[y].Substring(x, Term.Length);
-                    if (sub2 == Term || sub2 == rev)
-                        count++;
-                }
-
-                var sb = new StringBuilder(Term.Length);
-                if (y >= Term.Length)
-                {
-                    for (var y2 = y; y2 >= y - Term.Length; y2--)
-                    {
-                        sb.Append(Lines[y2][x]);
-                        if (sb.ToString() == Term)
-                            count++;
-                    }
-                }
                     
+                }
+
+
+                
+                // for (var i = col; i >= 0 && sb.Length <= Term.Length; i--)
+                //     sb.Append(Lines[row][i]);
+                // if (sb.ToString() == Term || sb.ToString() == Term.Reverse().ToString())
+                //     count++;
+                // sb.Clear();
+                //
+                // for(var i = col; i < Lines[0].Length && sb.Length <= Term.Length; i++)
+                //     sb.Append(Lines[row][i]);
+                // if (sb.ToString() == Term || sb.ToString() == Term.Reverse().ToString())
+                //     count++;
+                // sb.Clear();
+                
+                // for(int dx = col, dy = row; col - dx >= 0 && row - dy >= 0 && sb.Length <= Term.Length; dx++, dy++)
+                //     sb.Append(Lines[row + dy][dx]);
             }
         }
         
+        
+        
+        return "";
+    }
+
+    private bool IsValidCell(int row, int col, int dy, int dx)
+    {
+        return col 
+    }
+
+    public string Part1B()
+    {
+
+
         return "";
     }
 
