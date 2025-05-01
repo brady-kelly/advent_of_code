@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Puzzles;
 
 public class Day4(int i) : Day(i)
@@ -27,21 +25,19 @@ public class Day4(int i) : Day(i)
         {
             for (int col = 0; col < Lines[0].Length; col++)
             {
-                var found = new char[Term.Length];
+                var charY = col;
+                var charX = row;
+                var word = new char[Term.Length];
                 foreach (var d in deltas)
                 {
-                    var sy = col + d[0];
-                    var sx = row + d[1];
-                    
-                    for (var i = 0; i < found.Length; i++)
+                    for (var i = 0; i < word.Length; i++)
                     {
-                        found[i] = Lines[sy][sx];
-                        sy += d[0];
-                        sx += d[1];
-                        if (sy >= Lines.Count || sy == 0 || sx >= Lines[0].Length || sx == 0)
-                            break;
+                        charY += d[0];
+                        charX += d[1];
+                        if (charY >= 0 && charY < Lines[0].Length && charX >= 0 && charX < Lines.Count)
+                            word[i] = Lines[charY][charX];
                     }
-                    var fs = string.Join("", found);
+                    var fs = string.Join("", word);
                     if (fs == Term || fs == Term.Reverse().ToString())
                         count++;
                 }
@@ -52,8 +48,6 @@ public class Day4(int i) : Day(i)
     
     public string Part1B()
     {
-
-
         return "";
     }
 
