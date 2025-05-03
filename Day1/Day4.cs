@@ -10,7 +10,6 @@ public class Day4(int i) : Day(i)
         
         int[][] deltas = new int[][]
         {
-            [0, 0],
             [0, -1],
             [-1, -1],
             [-1, 0],
@@ -25,16 +24,19 @@ public class Day4(int i) : Day(i)
         {
             for (int col = 0; col < Lines[0].Length; col++)
             {
-                var charY = col;
-                var charX = row;
-                var word = new char[Term.Length];
                 foreach (var d in deltas)
                 {
-                    for (var i = 0; i < word.Length; i++)
+                    var charY = col;
+                    var charX = row;
+                    
+                    var word = new char[Term.Length];
+                    word[0] = Lines[row][col];
+                    
+                    for (var i = 1; i < word.Length; i++)
                     {
                         charY += d[0];
                         charX += d[1];
-                        if (charY >= 0 && charY < Lines[0].Length && charX >= 0 && charX < Lines.Count)
+                        if (charY >= 0 && charY < Lines[0].Length - 1 && charX >= 0 && charX < Lines.Count - 1)
                             word[i] = Lines[charY][charX];
                     }
                     var fs = string.Join("", word);
