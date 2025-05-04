@@ -8,17 +8,17 @@ public class Day4(int i) : Day(i)
     {
         var count = 0;
         
-        int[][] deltas = new int[][]
-        {
-            [0, -1],
-            [-1, -1],
-            [-1, 0],
-            [-1, +1],
-            [0, +1],
-            [+1, +1],
-            [+1, 0],
-            [+1, -1]
-        };
+        List<(int x, int y)> deltas =
+        [
+            (-1, 0),
+            (-1, -1),
+            (0, -1),
+            (1, 1),
+            (1, 0),
+            (1, -1),
+            (0, -1),
+            (-1, -1)
+        ];
         
         for (int row = 0; row < Lines.Count; row++)
         {
@@ -26,18 +26,19 @@ public class Day4(int i) : Day(i)
             {
                 foreach (var d in deltas)
                 {
-                    var charY = col;
-                    var charX = row;
+                    var visitX = col;
+                    var visitY = row;
                     
                     var word = new char[Term.Length];
                     word[0] = Lines[row][col];
                     
                     for (var i = 1; i < word.Length; i++)
                     {
-                        charY += d[0];
-                        charX += d[1];
-                        if (charY >= 0 && charY < Lines[0].Length - 1 && charX >= 0 && charX < Lines.Count - 1)
-                            word[i] = Lines[charY][charX];
+                        visitX += d.x;
+                        visitY += d.y;
+
+                        if (visitY >= 0 && visitY >= row && visitY < Lines.Count && visitX >= 0 && visitX <= col  && visitX < Lines[row].Length)
+                            word[i] = Lines[visitY][visitX];
                     }
                     var fs = string.Join("", word);
                     if (fs == Term || fs == Term.Reverse().ToString())
